@@ -19,6 +19,12 @@ export default class BH2eCreatureSheet extends ActorSheet {
 
     activateListeners(html) {
         html.find(".bh2e-delete-item-icon").click(this._onDeleteItemClicked.bind(this));
+        // Bit of a kludge to avoid underlying anchors being clicked where icons
+        // have been set with click event handlers (issue #35).
+        html.find(".bh2e-action-link").click((e) => {
+            e.preventDefault();
+            return(false);
+        });
         super.activateListeners(html);
     }
 
